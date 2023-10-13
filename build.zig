@@ -50,24 +50,27 @@ pub fn build(b: *std.Build) !void {
     lib.addIncludePath(.{ .path = "lib/facil/http/parsers" });
 
     // C source files
-    lib.addCSourceFiles(&.{
-        "lib/facil/fio.c",
-        "lib/facil/fio_zig.c",
-        "lib/facil/http/http.c",
-        "lib/facil/http/http1.c",
-        "lib/facil/http/websockets.c",
-        "lib/facil/http/http_internal.c",
-        "lib/facil/fiobj/fiobj_numbers.c",
-        "lib/facil/fiobj/fio_siphash.c",
-        "lib/facil/fiobj/fiobj_str.c",
-        "lib/facil/fiobj/fiobj_ary.c",
-        "lib/facil/fiobj/fiobj_data.c",
-        "lib/facil/fiobj/fiobj_hash.c",
-        "lib/facil/fiobj/fiobj_json.c",
-        "lib/facil/fiobj/fiobject.c",
-        "lib/facil/fiobj/fiobj_mustache.c",
-        "lib/facil/cli/fio_cli.c",
-    }, flags.items);
+    lib.addCSourceFiles(.{
+        .flags = flags.items,
+        .files = &.{
+            "lib/facil/fio.c",
+            "lib/facil/fio_zig.c",
+            "lib/facil/http/http.c",
+            "lib/facil/http/http1.c",
+            "lib/facil/http/websockets.c",
+            "lib/facil/http/http_internal.c",
+            "lib/facil/fiobj/fiobj_numbers.c",
+            "lib/facil/fiobj/fio_siphash.c",
+            "lib/facil/fiobj/fiobj_str.c",
+            "lib/facil/fiobj/fiobj_ary.c",
+            "lib/facil/fiobj/fiobj_data.c",
+            "lib/facil/fiobj/fiobj_hash.c",
+            "lib/facil/fiobj/fiobj_json.c",
+            "lib/facil/fiobj/fiobject.c",
+            "lib/facil/fiobj/fiobj_mustache.c",
+            "lib/facil/cli/fio_cli.c",
+        },
+    });
 
     // link against libc
     lib.linkLibC();
